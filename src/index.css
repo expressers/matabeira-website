@@ -1,0 +1,155 @@
+@import "tailwindcss";
+@import "@fontsource-variable/archivo/wdth.css";
+@import "@fontsource-variable/figtree";
+
+@theme {
+  --font-display: "Archivo Variable", "Arial Narrow", sans-serif;
+  --font-sans: "Figtree Variable", system-ui, sans-serif;
+
+  /* Cal: a parede caiada das cabanas */
+  --color-cal: #f2f3ef;
+  --color-cal-2: #e7e9e3;
+  /* Madeira do passadiço */
+  --color-madeira: #7a5638;
+  --color-madeira-escura: #4a321f;
+  --color-madeira-clara: #a7825f;
+  /* Telha dos telhados: a única cor de acção */
+  --color-telha: #b9472a;
+  --color-telha-escura: #963619;
+  /* Água */
+  --color-lagoa: #1f97ad;
+  --color-mar: #0d4c5e;
+  /* Noite da piscina */
+  --color-noite: #0b1c27;
+  --color-noite-2: #132a38;
+  /* Palmeira */
+  --color-palma: #2f6a42;
+  /* Tinta */
+  --color-tinta: #1b2226;
+  --color-tinta-2: #4a5459;
+
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+    text-rendering: optimizeLegibility;
+    scrollbar-color: var(--color-madeira) var(--color-cal-2);
+  }
+  body {
+    background: var(--color-cal);
+    color: var(--color-tinta);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background: var(--color-telha);
+    color: var(--color-cal);
+  }
+  :focus-visible {
+    outline: 2px solid var(--color-telha);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+  a {
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 1px;
+  }
+  h1, h2, h3 {
+    text-wrap: balance;
+  }
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer components {
+  /* Letras de placa de resort: grotesca larga e pesada */
+  .sign {
+    font-family: var(--font-display);
+    font-variation-settings: "wdth" 125;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 0.92;
+  }
+  .sign-narrow {
+    font-family: var(--font-display);
+    font-variation-settings: "wdth" 112;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  /* As tábuas do passadiço: veios horizontais e juntas entre tábuas */
+  .planks {
+    background-color: var(--color-madeira);
+    background-image:
+      repeating-linear-gradient(180deg,
+        transparent 0 26px,
+        rgb(30 18 10 / 0.55) 26px 28px),
+      repeating-linear-gradient(90deg,
+        rgb(255 230 200 / 0.05) 0 3px,
+        transparent 3px 9px,
+        rgb(0 0 0 / 0.06) 9px 11px,
+        transparent 11px 19px),
+      linear-gradient(90deg, rgb(0 0 0 / 0.22), transparent 18%, transparent 82%, rgb(0 0 0 / 0.22));
+  }
+  .planks-x {
+    background-color: var(--color-madeira);
+    background-image:
+      repeating-linear-gradient(90deg,
+        transparent 0 54px,
+        rgb(30 18 10 / 0.5) 54px 56px),
+      repeating-linear-gradient(180deg,
+        rgb(255 230 200 / 0.05) 0 3px,
+        transparent 3px 9px,
+        rgb(0 0 0 / 0.06) 9px 11px,
+        transparent 11px 19px);
+  }
+
+  /* Revelação das fotos: como quem avança no passadiço */
+  .js .reveal {
+    clip-path: inset(18% 0 0 0);
+    opacity: 0.001;
+    transform: translateY(24px);
+    transition:
+      clip-path 900ms var(--ease-out),
+      opacity 600ms var(--ease-out),
+      transform 900ms var(--ease-out);
+  }
+  .js .reveal.is-in {
+    clip-path: inset(0 0 0 0);
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Letreiro do hero: as camadas registam por ordem */
+  .js .layer {
+    opacity: 0.001;
+    transform: translateY(14px);
+    filter: blur(6px);
+    animation: layer-in 800ms var(--ease-out) forwards;
+  }
+  @keyframes layer-in {
+    to {
+      opacity: 1;
+      transform: none;
+      filter: blur(0);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal,
+  .js .layer {
+    clip-path: none;
+    opacity: 1;
+    transform: none;
+    filter: none;
+    animation: none;
+    transition: none;
+  }
+}

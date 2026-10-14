@@ -1,0 +1,15 @@
+{
+  "name": "Resort Matabeira - O passadiço",
+  "colors": {
+    "cal": "#f2f3ef", "cal-2": "#e7e9e3", "madeira": "#7a5638", "madeira-escura": "#4a321f",
+    "telha": "#b9472a", "telha-escura": "#963619", "lagoa": "#1f97ad", "mar": "#0d4c5e",
+    "noite": "#0b1c27", "palma": "#2f6a42", "tinta": "#1b2226", "tinta-2": "#4a5459"
+  },
+  "fonts": {
+    "display": "Archivo Variable (wdth 125, 800, uppercase)",
+    "label": "Archivo Variable (wdth 112, 700, uppercase)",
+    "body": "Figtree Variable"
+  },
+  "radius": "4px",
+  "easing": { "out": "cubic-bezier(0.23, 1, 0.32, 1)" }
+}
